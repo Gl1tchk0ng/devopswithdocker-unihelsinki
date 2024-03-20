@@ -1,0 +1,12 @@
+Answer : Secret message is: 'You can find the source code here: https://github.com/docker-hy'
+
+Script 
+
+docker pull devopsdockeruh/simple-web-service
+docker run -d -it --name loper 4e 
+docker logs -f looper
+docker attach --no-stdin looper
+docker exec -it looper bash
+root@c0e111735132:/usr/src/app# tail -f ./text.log
+
+and we get the Answer
