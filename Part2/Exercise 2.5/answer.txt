@@ -1,0 +1,4 @@
+cmd used :- docker compose up --scale compute=3
+
+this works as the service name is compute which has to be scaled so that the input is recieved on multiple fronts in this case it is set to three 
+here the problem is northing but that inputs that is rapidly being generated must be computed the same speed so we need to improve on the computational front to give out the faster result.
