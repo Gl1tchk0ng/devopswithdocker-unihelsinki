@@ -1,0 +1,49 @@
+version: "3.8"
+
+services:
+  redis:
+    image: redis   
+    restart: unless-stopped
+    command: redis-server 
+
+  proxy:
+    image: nginx
+    volumes: 
+      - ./ngnix.config:/etc/nginx/nginx.conf
+    ports:
+      - 80:80
+    depends_on:
+      - backend
+      - frontend
+
+  frontend:
+    build: ./example-frontend
+    #ports:
+    #  - "5000:5000"  
+
+  backend:
+    build: ./example-backend 
+    #ports:
+    #  - 8080:8080 
+    depends_on:
+      - frontend 
+      - postgres
+      - redis
+    environment:
+      - REDIS_HOST=redis
+      - POSTGRES_HOST=postgres
+
+  postgres:
+    image: postgres
+    restart: unless-stopped
+    environment:
+      POSTGRES_PASSWORD: postgres
+      POSTGRES_HOST : postgres
+      POSTGRES_USER:  postgres
+      POSTGRES_DATABASE:  postgres
+    volumes:
+      - database:/var/lib/postgresql/data
+
+volumes:
+  database:
+
